@@ -1,0 +1,100 @@
+
+R version 3.2.2 (2015-08-14) -- "Fire Safety"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> # author:               Anton Kratz
+> # created:              Fri Jan 29 11:40:42 JST 2016
+> # last change:          Mon Apr  4 12:47:50 JST 2016
+> # modified by Charles:  Mon Feb  1
+> 
+> # ```{r load_data}
+> library(edgeR)
+Loading required package: limma
+> library("magrittr")
+> 
+> setwd("~/genome-research-edgeR")
+> 
+> mycountdata <- read.delim("data/expr_table.bmemb_vs_bcyto.csv", header = TRUE, sep = "\t")
+> mycoldata <- read.delim("data/expr_table.desc.bmemb_vs_bcyto.csv", header = TRUE, sep = "\t")
+> 
+> cds <- DGEList(mycountdata, group = mycoldata$compartment) %>% calcNormFactors
+> 
+> plotMDS(cds , main = "MDS Plot for Count Data", labels = colnames(cds$counts))
+> 
+> plotSmear(cds)
+> 
+> gen_diffexp <- function(design) {
++   glm <- estimateDisp(cds,design) %>%
++            glmFit(design) %>%
++            glmLRT
++   decideTestsDGE(glm) %>% summary %>% print
++   invisible(glm)
++ }
+> 
+> plot_results <- function(glm, main) {
++   plotSmear( glm
++            , de.tags=rownames(glm)[decideTestsDGE(glm) != 0]
++            , cex=0.5
++            , main = main)
++   invisible(glm)
++ }
+> 
+> 
+> 
+> design <- with(mycoldata, model.matrix(~replicate+compartment))
+> glm <- gen_diffexp(design)
+   [,1] 
+-1  9067
+0  29641
+1   9341
+> topTags(glm)
+Coefficient:  compartmentmemb 
+                              logFC    logCPM       LR       PValue
+chr20_27421382_27421407_+  4.395080  8.692378 419.6972 2.840215e-93
+chr19_24968730_24968795_+  4.101499 10.597517 401.2072 3.007077e-89
+chr10_35855268_35855362_-  4.211935  9.814001 397.4076 2.019673e-88
+chr16_29338989_29339077_-  4.869740  8.127224 364.5446 2.884146e-81
+chr4_149668670_149668751_- 3.476198 10.010296 347.9919 1.159938e-77
+chr7_23340379_23340460_-   4.027124  9.666346 345.6238 3.803039e-77
+chr8_62453311_62453409_+   3.648885  9.073815 330.5405 7.329276e-74
+chr4_160658750_160658827_- 3.639521  9.533155 319.9479 1.486815e-71
+chr3_108712885_108712970_+ 3.907484  8.313190 314.4772 2.311641e-70
+chr10_35856515_35856585_-  3.557695  9.491529 304.5587 3.346675e-68
+                                    FDR
+chr20_27421382_27421407_+  1.364695e-88
+chr19_24968730_24968795_+  7.224352e-85
+chr10_35855268_35855362_-  3.234775e-84
+chr16_29338989_29339077_-  3.464509e-77
+chr4_149668670_149668751_- 1.114677e-73
+chr7_23340379_23340460_-   3.045537e-73
+chr8_62453311_62453409_+   5.030920e-70
+chr4_160658750_160658827_- 8.929995e-68
+chr3_108712885_108712970_+ 1.234134e-66
+chr10_35856515_35856585_-  1.608044e-64
+> plot_results(glm, "~replicate+compartment")
+> 
+> tab <- topTags(glm, n=Inf)
+> write.table(tab, file="data/edgeR.bmemb_vs_bcyto.txt", sep='\t', quote=F)
+> 
+> # ```
+> 
+> proc.time()
+   user  system elapsed 
+ 53.236   0.876  54.110 
