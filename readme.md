@@ -1,7 +1,7 @@
 get the input data from the paper:
 
 ```
-wget http://genome.cshlp.org/content/suppl/2014/06/05/gr.164095.113.DC1/Supplemental_Table.S3.xlsx data/.
+wget http://genome.cshlp.org/content/suppl/2014/06/05/gr.164095.113.DC1/Supplemental_Table.S3.xlsx
 ```
 
 open the table with gnumeric 1.12.24.
@@ -17,7 +17,7 @@ now I have the data in a file `Supplemental_Table.S3.csv`
 dump the unnecessary columns, replace the comma with TAB:
 
 ```
-mv data/Supplemental_Table.S3.csv data/S3.csv
+mv Supplemental_Table.S3.csv data/S3.csv
 sed 's/,/\t/g' data/S3.csv | cut -f 1-5,10-27 > data/expr_table.bound_vs_unbound.csv
 sed 's/,/\t/g' data/S3.csv | cut -f 1,2,4,10-23,26,27 > data/expr_table.bmemb_vs_bcyto.csv
 ```
