@@ -38,15 +38,20 @@ R CMD BATCH edgeR.bound_vs_unbound.R
 
 
 ```
-tail -n+2 data/edgeR.bound_vs_unbound.txt | sort -k 1,1 > data/srtd.payload
-tail -n+2 data/S3.csv | sort -k 1,1 | cut -d "," -f 1,64 | sed 's/,/\t/g' > data/srtd.S3.csv
-paste data/srtd.payload data/srtd.S3.csv | cut -f 1-6,8 > foobar 
+tail -n+2 data/edgeR.bound_vs_unbound.txt | sort -k 1,1 > srtd.payload
+tail -n+2 S3.csv | sort -k 1,1 | cut -d "," -f 1,64 | sed 's/,/\t/g' > srtd.S3.csv
+paste srtd.payload srtd.S3.csv | cut -f 1-6,8 > foobar 
 cat data/header_wh_symbol foobar >> out/edgeR.bound_vs_unbound.tsv
 
-tail -n+2 data/edgeR.bmemb_vs_bcyto.txt | sort -k 1,1 > data/srtd.payload
-tail -n+2 data/S3.csv | sort -k 1,1 | cut -d "," -f 1,64 | sed 's/,/\t/g' > data/srtd.S3.csv
-paste data/srtd.payload data/srtd.S3.csv | cut -f 1-6,8 > foobar 
+tail -n+2 data/edgeR.bmemb_vs_bcyto.txt | sort -k 1,1 > srtd.payload
+tail -n+2 S3.csv | sort -k 1,1 | cut -d "," -f 1,64 | sed 's/,/\t/g' > srtd.S3.csv
+paste srtd.payload srtd.S3.csv | cut -f 1-6,8 > foobar 
 cat data/header_wh_symbol foobar >> out/edgeR.bmemb_vs_bcyt.tsv
+
+rm srtd.payload
+rm srtd.S3.csv
+rm foobar
+
 ```
 
 `DESeq2IVA_bound_vs_unbound.tsv` can now be loaded into DESeq2IVA, done.
