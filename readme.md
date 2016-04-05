@@ -68,13 +68,13 @@ R CMD BATCH DESeq2.bound_vs_unbound.R
 ```
 tail -n+2 data/DESeq2.bound_vs_unbound.txt | sort -k 1,1 > srtd.payload
 tail -n+2 S3.csv | sort -k 1,1 | cut -d "," -f 1,64 | sed 's/,/\t/g' > srtd.S3.csv
-paste srtd.payload srtd.S3.csv | cut -f 1-6,8 > foobar 
+paste srtd.payload srtd.S3.csv | cut -f 1-7,9 > foobar 
 cat data/d2.header_wh_symbol foobar >> out/DESeq2.bound_vs_unbound.tsv
 
 tail -n+2 data/DESeq2.bmemb_vs_bcyto.txt | sort -k 1,1 > srtd.payload
 tail -n+2 S3.csv | sort -k 1,1 | cut -d "," -f 1,64 | sed 's/,/\t/g' > srtd.S3.csv
-paste srtd.payload srtd.S3.csv | cut -f 1-6,8 > foobar 
-cat data/d2.header_wh_symbol foobar >> out/edgeR.bmemb_vs_bcyto.tsv
+paste srtd.payload srtd.S3.csv | cut -f 1-7,9 > foobar 
+cat data/d2.header_wh_symbol foobar >> out/DESeq2.bmemb_vs_bcyto.tsv
 
 rm srtd.payload
 rm srtd.S3.csv
