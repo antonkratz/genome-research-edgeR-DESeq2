@@ -17,7 +17,7 @@ setwd("~/genome-research-edgeR")
 # Define the main test function
 de_check <- function (this_dds, this_contrast, outfile) {
 	res <- results(this_dds, contrast=this_contrast)
-	write.table(as.data.frame(res),file=paste(outfile, ".csv", sep = ""), quote=FALSE, sep="\t")
+	write.table(as.data.frame(res),file=paste(outfile, ".txt", sep = ""), quote=FALSE, sep="\t")
 	print(sum(res$padj < 0.1, na.rm=TRUE))
 	print(sum(res$pvalue < 0.05, na.rm=TRUE))
 	DESeq2::plotMA(res)
@@ -30,5 +30,5 @@ mycoldata <- read.delim("data/expr_table.desc.bound_vs_unbound.csv", header = TR
 dds <- DESeqDataSetFromMatrix(countData = mycountdata, colData = mycoldata, design = ~ replicate + pulldown)
 dds <- DESeq(dds)
 
-de_check(dds, c("pulldown","bound","unbound"), "deseq2results/bound_vs_unbound")
+de_check(dds, c("pulldown","bound","unbound"), "data/DESeq2.bound_vs_unbound")
 

@@ -17,7 +17,7 @@ setwd("~/genome-research-edgeR")
 # Define the main test function
 de_check <- function (this_dds, this_contrast, outfile) {
 	res <- results(this_dds, contrast=this_contrast)
-	write.table(as.data.frame(res),file=paste(outfile, ".csv", sep = ""), quote=FALSE, sep="\t")
+	write.table(as.data.frame(res),file=paste(outfile, ".txt", sep = ""), quote=FALSE, sep="\t")
 	print(sum(res$padj < 0.1, na.rm=TRUE))
 	print(sum(res$pvalue < 0.05, na.rm=TRUE))
 	DESeq2::plotMA(res)
@@ -30,5 +30,5 @@ mycoldata <- read.delim("data/expr_table.desc.bmemb_vs_bcyto.csv", header = TRUE
 dds <- DESeqDataSetFromMatrix(countData = mycountdata, colData = mycoldata, design = ~ replicate + compartment)
 dds <- DESeq(dds)
 
-de_check(dds, c("compartment","memb","cyto"), "deseq2results/bmemb_vs_bcyto")
+de_check(dds, c("compartment","memb","cyto"), "data/DESeq2.bmemb_vs_bcyto")
 
