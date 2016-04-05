@@ -56,3 +56,9 @@ rm foobar
 ```
 
 `DESeq2IVA_bound_vs_unbound.tsv` can now be loaded into DESeq2IVA, done.
+
+Now also do this to generate the DESeq2-based input files. This uses the same input files, so I keep this in the same project.
+```
+R CMD BATCH DESeq2.bound_vs_unbound.R
+```
+
