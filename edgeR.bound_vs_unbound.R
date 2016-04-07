@@ -11,6 +11,7 @@ setwd("~/genome-research-edgeR")
 
 mycountdata <- read.delim("data/expr_table.bound_vs_unbound.csv", header = TRUE, sep = "\t")
 mycoldata <- read.delim("data/expr_table.desc.bound_vs_unbound.csv", header = TRUE, sep = "\t")
+mycoldata$pulldown <- mycoldata$pulldown %>% as.character %>% factor(levels=c("unbound", "bound"))
 
 cds <- DGEList(mycountdata, group = mycoldata$pulldown) %>% calcNormFactors
 
