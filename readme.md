@@ -31,8 +31,8 @@ Manually prepare a `expr_table.desc.bound_vs_unbound.csv` file.
 Execute this in RStudio, or just run:
 
 ```
-R CMD BATCH edgeR.bound_vs_unbound.R
-R CMD BATCH edgeR.bmemb_vs_bcyto.R
+R CMD BATCH Rscripts/edgeR.bound_vs_unbound.R Rdump/edgeR.bound_vs_unbound.Rout
+R CMD BATCH Rscripts/edgeR.bmemb_vs_bcyto.R Rdump/DESeq2.bmemb_vs_bcyto.Rout
 ```
 
 ...okay now I have the results. Add columns with gene symbol and representative cluster. The idea is to sort the original sheet, sort the results file, and add the two columns.
@@ -59,7 +59,8 @@ rm foobar
 
 Now also do this to generate the DESeq2-based input files. This uses the same input files, so I keep this in the same project.
 ```
-R CMD BATCH DESeq2.bound_vs_unbound.R
+R CMD BATCH Rscripts/DESeq2.bound_vs_unbound.R Rdump/DESeq2.bmemb_vs_bcyto.Rout
+R CMD BATCH Rscripts/DESeq2.bmemb_vs_bcyto.R Rdump/DESeq2.bmemb_vs_bcyto.Rout
 ```
 
 **Final results files w/o symbol: txt files in data**
