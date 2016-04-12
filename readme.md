@@ -32,7 +32,7 @@ Execute this in RStudio, or just run:
 
 ```
 R CMD BATCH Rscripts/edgeR.bound_vs_unbound.R Rdump/edgeR.bound_vs_unbound.Rout
-R CMD BATCH Rscripts/edgeR.bmemb_vs_bcyto.R Rdump/DESeq2.bmemb_vs_bcyto.Rout
+R CMD BATCH Rscripts/edgeR.bmemb_vs_bcyto.R Rdump/edgeR.bmemb_vs_bcyto.Rout
 ```
 
 ...okay now I have the results. Add columns with gene symbol and representative cluster. The idea is to sort the original sheet, sort the results file, and add the two columns.

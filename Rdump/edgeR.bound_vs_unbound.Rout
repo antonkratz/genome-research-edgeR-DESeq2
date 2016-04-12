@@ -1,0 +1,108 @@
+
+R version 3.2.2 (2015-08-14) -- "Fire Safety"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+During startup - Warning messages:
+1: multiple methods tables found for ‘organism’ 
+2: multiple methods tables found for ‘species’ 
+3: replacing previous import by ‘GenomeInfoDb::species’ when loading ‘GenomicRanges’ 
+4: replacing previous import by ‘GenomeInfoDb::organism’ when loading ‘GenomicRanges’ 
+5: multiple methods tables found for ‘fileName’ 
+6: multiple methods tables found for ‘organism’ 
+> # author:               Anton Kratz
+> # created:              Fri Jan 29 11:40:42 JST 2016
+> # last change:          Mon Apr  4 12:47:50 JST 2016
+> # modified by Charles:  Mon Feb  1
+> 
+> # ```{r load_data}
+> library(edgeR)
+Loading required package: limma
+> library("magrittr")
+> 
+> setwd("~/genome-research-edgeR")
+> 
+> mycountdata <- read.delim("data/expr_table.bound_vs_unbound.csv", header = TRUE, sep = "\t")
+> mycoldata <- read.delim("data/expr_table.desc.bound_vs_unbound.csv", header = TRUE, sep = "\t")
+> mycoldata$pulldown <- mycoldata$pulldown %>% as.character %>% factor(levels=c("unbound", "bound"))
+> 
+> cds <- DGEList(mycountdata, group = mycoldata$pulldown) %>% calcNormFactors
+> 
+> plotMDS(cds , main = "MDS Plot for Count Data", labels = colnames(cds$counts))
+> 
+> plotSmear(cds)
+> 
+> gen_diffexp <- function(design) {
++   glm <- estimateDisp(cds,design) %>%
++            glmFit(design) %>%
++            glmLRT
++   decideTestsDGE(glm) %>% summary %>% print
++   invisible(glm)
++ }
+> 
+> plot_results <- function(glm, main) {
++   plotSmear( glm
++            , de.tags=rownames(glm)[decideTestsDGE(glm) != 0]
++            , cex=0.5
++            , main = main)
++   invisible(glm)
++ }
+> 
+> 
+> 
+> design <- with(mycoldata, model.matrix(~replicate+pulldown))
+> glm <- gen_diffexp(design)
+   [,1] 
+-1  2248
+0  40953
+1   4848
+> topTags(glm)
+Coefficient:  pulldownbound 
+                               logFC   logCPM       LR       PValue
+chr6_134136618_134136619_+ -5.847975 4.421399 84.34549 4.154447e-20
+chrM_1550_1551_+           -5.793470 5.174035 81.70058 1.583468e-19
+chr6_134136832_134136841_+ -5.092179 6.139313 79.46348 4.912230e-19
+chr18_29501112_29501184_+  -5.426682 4.482706 75.75213 3.216032e-18
+chrM_1216_1217_+           -5.329651 5.831486 73.59408 9.595185e-18
+chr10_90677105_90677187_+  -5.192260 4.149593 71.55227 2.700094e-17
+chr1_78664918_78664957_+   -6.059347 5.006838 71.42015 2.887094e-17
+chrM_132_133_+             -4.578220 6.499299 71.07092 3.446123e-17
+chr1_208429891_208429892_- -4.407276 5.555172 65.04699 7.313319e-16
+chr1_208429903_208429904_- -4.526607 6.288932 64.68397 8.792748e-16
+                                    FDR
+chr6_134136618_134136619_+ 1.996170e-15
+chrM_1550_1551_+           3.804202e-15
+chr6_134136832_134136841_+ 7.867591e-15
+chr18_29501112_29501184_+  3.863178e-14
+chrM_1216_1217_+           9.220781e-14
+chr10_90677105_90677187_+  1.981742e-13
+chr1_78664918_78664957_+   1.981742e-13
+chrM_132_133_+             2.069784e-13
+chr1_208429891_208429892_- 3.904419e-12
+chr1_208429903_208429904_- 4.224827e-12
+> plot_results(glm, "~replicate+pulldown")
+> 
+> tab <- topTags(glm, n=Inf)
+> write.table(tab, file="out/edgeR/edgeR.bound_vs_unbound.txt", sep='\t', quote=F)
+> 
+> # ```
+> 
+> proc.time()
+   user  system elapsed 
+ 72.452   0.636  73.099 
