@@ -39,20 +39,19 @@ R CMD BATCH Rscripts/edgeR.bmemb_vs_bcyto.R Rdump/edgeR.bmemb_vs_bcyto.Rout
 
 
 ```
-tail -n+2 data/edgeR.bound_vs_unbound.txt | sort -k 1,1 > srtd.payload
+tail -n+2 out/edgeR/edgeR.bound_vs_unbound.txt | sort -k 1,1 > srtd.payload
 tail -n+2 S3.csv | sort -k 1,1 | cut -d "," -f 1,64 | sed 's/,/\t/g' > srtd.S3.csv
 paste srtd.payload srtd.S3.csv | cut -f 1-6,8 > foobar 
-cat data/header_wh_symbol foobar >> out/edgeR.bound_vs_unbound.tsv
+cat data/header_wh_symbol foobar >> annotated/edgeR/edgeR.bound_vs_unbound.tsv
 
-tail -n+2 data/edgeR.bmemb_vs_bcyto.txt | sort -k 1,1 > srtd.payload
+tail -n+2 out/edgeR/edgeR.bmemb_vs_bcyto.txt | sort -k 1,1 > srtd.payload
 tail -n+2 S3.csv | sort -k 1,1 | cut -d "," -f 1,64 | sed 's/,/\t/g' > srtd.S3.csv
 paste srtd.payload srtd.S3.csv | cut -f 1-6,8 > foobar 
-cat data/header_wh_symbol foobar >> out/edgeR.bmemb_vs_bcyto.tsv
+cat data/header_wh_symbol foobar > annotated/edgeR/edgeR.bmemb_vs_bcyto.tsv
 
 rm srtd.payload
 rm srtd.S3.csv
 rm foobar
-
 ```
 
 `DESeq2IVA_bound_vs_unbound.tsv` can now be loaded into DESeq2IVA, done.
@@ -67,15 +66,15 @@ R CMD BATCH Rscripts/DESeq2.bmemb_vs_bcyto.R Rdump/DESeq2.bmemb_vs_bcyto.Rout
 **Final results files w/h symbol: csv files in out**
 
 ```
-tail -n+2 data/DESeq2.bound_vs_unbound.txt | sort -k 1,1 > srtd.payload
+tail -n+2 out/DESeq2/DESeq2.bound_vs_unbound.txt | sort -k 1,1 > srtd.payload
 tail -n+2 S3.csv | sort -k 1,1 | cut -d "," -f 1,64 | sed 's/,/\t/g' > srtd.S3.csv
 paste srtd.payload srtd.S3.csv | cut -f 1-7,9 > foobar 
-cat data/d2.header_wh_symbol foobar >> out/DESeq2.bound_vs_unbound.tsv
+cat data/d2.header_wh_symbol foobar >> annotated/DESeq2/DESeq2.bound_vs_unbound.tsv
 
-tail -n+2 data/DESeq2.bmemb_vs_bcyto.txt | sort -k 1,1 > srtd.payload
+tail -n+2 out/DESeq2/DESeq2.bmemb_vs_bcyto.txt | sort -k 1,1 > srtd.payload
 tail -n+2 S3.csv | sort -k 1,1 | cut -d "," -f 1,64 | sed 's/,/\t/g' > srtd.S3.csv
 paste srtd.payload srtd.S3.csv | cut -f 1-7,9 > foobar 
-cat data/d2.header_wh_symbol foobar >> out/DESeq2.bmemb_vs_bcyto.tsv
+cat data/d2.header_wh_symbol foobar >> annotated/DESeq2/DESeq2.bmemb_vs_bcyto.tsv
 
 rm srtd.payload
 rm srtd.S3.csv
