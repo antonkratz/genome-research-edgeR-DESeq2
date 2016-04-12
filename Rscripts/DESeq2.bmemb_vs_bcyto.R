@@ -30,5 +30,5 @@ mycoldata <- read.delim("data/expr_table.desc.bmemb_vs_bcyto.csv", header = TRUE
 dds <- DESeqDataSetFromMatrix(countData = mycountdata, colData = mycoldata, design = ~ replicate + compartment)
 dds <- DESeq(dds)
 
-de_check(dds, c("compartment","memb","cyto"), "data/DESeq2.bmemb_vs_bcyto")
+de_check(dds, c("compartment","memb","cyto"), "out/DESeq2/DESeq2.bmemb_vs_bcyto")
 

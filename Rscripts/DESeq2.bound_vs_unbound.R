@@ -30,5 +30,5 @@ mycoldata <- read.delim("data/expr_table.desc.bound_vs_unbound.csv", header = TR
 dds <- DESeqDataSetFromMatrix(countData = mycountdata, colData = mycoldata, design = ~ replicate + pulldown)
 dds <- DESeq(dds)
 
-de_check(dds, c("pulldown","bound","unbound"), "data/DESeq2.bound_vs_unbound")
+de_check(dds, c("pulldown","bound","unbound"), "out/DESeq2/DESeq2.bound_vs_unbound")
 

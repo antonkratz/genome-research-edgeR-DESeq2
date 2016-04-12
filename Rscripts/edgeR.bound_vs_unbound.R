@@ -43,6 +43,6 @@ topTags(glm)
 plot_results(glm, "~replicate+pulldown")
 
 tab <- topTags(glm, n=Inf)
-write.table(tab, file="data/edgeR.bound_vs_unbound.txt", sep='\t', quote=F)
+write.table(tab, file="out/edgeR/edgeR.bound_vs_unbound.txt", sep='\t', quote=F)
 
 # ```

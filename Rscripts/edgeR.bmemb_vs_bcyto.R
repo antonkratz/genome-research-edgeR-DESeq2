@@ -42,6 +42,6 @@ topTags(glm)
 plot_results(glm, "~replicate+compartment")
 
 tab <- topTags(glm, n=Inf)
-write.table(tab, file="data/edgeR.bmemb_vs_bcyto.txt", sep='\t', quote=F)
+write.table(tab, file="out/edgeR/edgeR.bmemb_vs_bcyto.txt", sep='\t', quote=F)
 
 # ```
