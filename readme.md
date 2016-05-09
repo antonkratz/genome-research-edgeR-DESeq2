@@ -60,8 +60,9 @@ R CMD BATCH Rscripts/DESeq2.bound_vs_unbound.R Rdump/DESeq2.bmemb_vs_bcyto.Rout
 R CMD BATCH Rscripts/DESeq2.bmemb_vs_bcyto.R Rdump/DESeq2.bmemb_vs_bcyto.Rout
 ```
 
-**Final results files w/o symbol: txt files in data**
-**Final results files w/h symbol: csv files in out**
+**Final results files w/o symbol: txt files in data.**
+
+**Final results files w/h symbol: csv files in out.**
 
 ```
 tail -n+2 out/DESeq2/DESeq2.bound_vs_unbound.txt | sort -k 1,1 > srtd.payload
