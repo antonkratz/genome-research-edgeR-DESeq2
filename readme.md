@@ -1,4 +1,4 @@
-Get the input data from the paper:
+Get the input data from Kratz, Anton, et al. "Digital expression profiling of the compartmentalized translatome of Purkinje neurons." Genome research 24.8 (2014): 1396-1410. http://genome.cshlp.org/content/24/8/1396
 
 ```
 wget http://genome.cshlp.org/content/suppl/2014/06/05/gr.164095.113.DC1/Supplemental_Table.S3.xlsx
