@@ -14,7 +14,7 @@ Export the first sheet as ASCII:
 
 Now I have the data in a file `Supplemental_Table.S3.csv`
 
-Dump the unnecessary columns, replace the comma with TAB:
+Simplify the file name, remove columns not relevant in this context, replace the comma with TAB:
 
 ```
 mv Supplemental_Table.S3.csv S3.csv
@@ -24,9 +24,9 @@ sed 's/,/\t/g' S3.csv | cut -f 1,2,4,10-23,26,27 > data/expr_table.bmemb_vs_bcyt
 
 **Delete the id field with vi. the file should not start with a TAB (i.e. delete the TAB after "id").**
 
-I can now use `expr_table.bound_vs_unbound.csv` as DESeq2 input!
+I can now use `expr_table.bound_vs_unbound.csv` and `expr_table.bmemb_vs_bcyto.csv` as DESeq2 input.
 
-Manually prepare a `expr_table.desc.bound_vs_unbound.csv` file.
+Manually prepare a `expr_table.desc.bound_vs_unbound.csv` and `expr_table.desc.bmemb_vs_bcyto.csv` file.
 
 Execute this in RStudio, or just run:
 
@@ -35,7 +35,7 @@ R CMD BATCH Rscripts/edgeR.bound_vs_unbound.R Rdump/edgeR.bound_vs_unbound.Rout
 R CMD BATCH Rscripts/edgeR.bmemb_vs_bcyto.R Rdump/edgeR.bmemb_vs_bcyto.Rout
 ```
 
-...okay now I have the results. Add columns with gene symbol and representative cluster. The idea is to sort the original sheet, sort the results file, and add the two columns.
+Add columns with gene symbol and representative cluster. The idea is to sort the original sheet, sort the results file, and add the two columns.
 
 
 ```
