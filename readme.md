@@ -4,9 +4,7 @@ Get the input data from Kratz, Anton, et al. "Digital expression profiling of th
 wget http://genome.cshlp.org/content/suppl/2014/06/05/gr.164095.113.DC1/Supplemental_Table.S3.xlsx
 ```
 
-Open the table with gnumeric 1.12.24.
-
-Export the first sheet as ASCII:
+Export the first sheet as ASCII. To do this open the table with a spreadsheet application, here I use gnumeric 1.12.24.
 
 ```
 "Data -> Export Data -> Export as CSV file..."
