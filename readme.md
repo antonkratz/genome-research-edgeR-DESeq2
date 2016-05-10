@@ -1,6 +1,11 @@
 This project describes how to generate the example data for DEIVA, https://github.com/Hypercubed/DEIVA.
 
-Get the input data from Kratz, Anton, et al. "Digital expression profiling of the compartmentalized translatome of Purkinje neurons." Genome research 24.8 (2014): 1396-1410. http://genome.cshlp.org/content/24/8/1396
+The example data are from this publication:
+[1] Kratz, Anton, et al. "Digital expression profiling of the compartmentalized translatome of Purkinje neurons." Genome research 24.8 (2014): 1396-1410. http://genome.cshlp.org/content/24/8/1396
+
+Four differential expression tests are performed: bound vs unbound, and bound memebrane vs unbound membrane, with DESeq2 and edgeR, respectively.
+
+Get the input data from [1]:
 
 ```
 wget http://genome.cshlp.org/content/suppl/2014/06/05/gr.164095.113.DC1/Supplemental_Table.S3.xlsx
