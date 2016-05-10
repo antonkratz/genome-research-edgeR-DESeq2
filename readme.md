@@ -63,7 +63,7 @@ rm foobar
 
 Now also do this to generate the DESeq2-based input files. This uses the same input files, so I keep this in the same project.
 ```
-R CMD BATCH Rscripts/DESeq2.bound_vs_unbound.R Rdump/DESeq2.bmemb_vs_bcyto.Rout
+R CMD BATCH Rscripts/DESeq2.bound_vs_unbound.R Rdump/DESeq2.bound_vs_unbound.Rout
 R CMD BATCH Rscripts/DESeq2.bmemb_vs_bcyto.R Rdump/DESeq2.bmemb_vs_bcyto.Rout
 ```
 
