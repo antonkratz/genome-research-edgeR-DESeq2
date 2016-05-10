@@ -1,3 +1,5 @@
+This project describes how to generate the example data for DEIVA, https://github.com/Hypercubed/DEIVA.
+
 Get the input data from Kratz, Anton, et al. "Digital expression profiling of the compartmentalized translatome of Purkinje neurons." Genome research 24.8 (2014): 1396-1410. http://genome.cshlp.org/content/24/8/1396
 
 ```
@@ -79,4 +81,3 @@ rm srtd.payload
 rm srtd.S3.csv
 rm foobar
 ```
-
