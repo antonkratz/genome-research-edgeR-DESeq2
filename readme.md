@@ -3,7 +3,7 @@ This project describes how to generate the example data for DEIVA, https://githu
 The example data are from this publication:
 [1] Kratz, Anton, et al. "Digital expression profiling of the compartmentalized translatome of Purkinje neurons." Genome research 24.8 (2014): 1396-1410. http://genome.cshlp.org/content/24/8/1396
 
-Four differential expression tests are performed: bound vs unbound, and bound memebrane vs unbound membrane, with DESeq2 and edgeR, respectively.
+Four differential expression tests are performed: bound vs unbound, and bound membrane vs unbound membrane, with DESeq2 and edgeR, respectively.
 
 Get the input data from [1]:
 
